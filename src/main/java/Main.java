@@ -91,7 +91,7 @@ public class Main {
 //			An integer n is prime if and only if n>1, and the only positive integers that divide n are 1 and n .
 
     return (n < 2) ? false: (n == 2)? true:
-        !IntStream.rangeClosed(2, Double.valueOf(Math.sqrt(n)).intValue()).parallel()
+        !IntStream.rangeClosed(0, Double.valueOf(Math.sqrt(n)/2).intValue()).map(i->i==0?2:i*2+1)
             .anyMatch(n2 -> n % n2 == 0);
   }
 
@@ -109,12 +109,12 @@ public class Main {
 //		System.err.printf("Test 1 (%s): %d\n", e1, e1.getCount() );
 //		System.err.printf("Test 2 (%s): %d\n", e2, e2.getCount() );
 
-    System.out.printf("Running...In parallel Mode\n");
+    System.err.printf("Running...In parallel Mode (professor can remove if condition to show entire process)\n");
     Optional<equationF> max = IntStream.rangeClosed(-(1000 -1), 1000 -1).parallel().boxed()
         .flatMap(a -> IntStream.rangeClosed(-1000, 1000).parallel().boxed().map(b -> new equationF(a, b)))
 //				.peek(f->System.err.printf("%s, count: %d \n", f, f.getCount()))
         .peek(f->{
-          if (System.currentTimeMillis() % (1000) == 0) 
+           if (System.currentTimeMillis() % (1000) == 0) // remove the this if condtion to print out the entire process
         // if (f.getA() % 100 == 0 && f.getB() % 100 == 0) 
           System.err.printf("Processing: %s, consecutive primes count: %d \n", f, f.getCount());
         })
