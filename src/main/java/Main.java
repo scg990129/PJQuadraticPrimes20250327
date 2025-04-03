@@ -1,3 +1,7 @@
+// Student: Shun Hoi, Yeung #900494756
+// Class Math 272 #14052
+// Date 20250402 Version 01
+// Homework: Programming Assignment: Quadratic Primes
 
 import java.util.Objects;
 import java.util.Optional;
